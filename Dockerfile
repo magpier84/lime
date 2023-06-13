@@ -37,4 +37,4 @@ USER lime
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
-CMD ["/opt/bin/lime"]
+CMD ["/opt/bin/lime server"]
