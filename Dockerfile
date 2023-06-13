@@ -18,6 +18,8 @@ RUN make build-alpine
 # Final Stage
 FROM alpine:latest
 
+RUN apk add --no-cache dumb-init 
+
 ARG GIT_COMMIT
 ARG VERSION
 LABEL REPO="https://github.com/werbot/lime"
