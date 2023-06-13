@@ -29,6 +29,8 @@ LABEL VERSION=$VERSION
 WORKDIR /opt/bin
 
 COPY --from=build-stage /go/src/github.com/werbot/lime/bin/lime /opt/bin/
+COPY --from=build-stage /go/src/github.com/werbot/lime/server/web /opt/bin/server/web
+
 RUN chmod +x /opt/bin/lime
 
 # Create appuser
