@@ -1,6 +1,7 @@
 package config
 
 import (
+	"os"
 	"fmt"
 	"log"
 	"time"
@@ -53,10 +54,13 @@ func init() {
 	var err error
 	defaultConfig = readViperConfig("LIME")
 
-	DB, err = gorm.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", defaultConfig.GetString("db_host"), defaultConfig.GetString("db_port"), defaultConfig.GetString("db_user"), defaultConfig.GetString("db_name"), defaultConfig.GetString("db_password")))
+	
+	DB, err = gorm.Open("postgres", os.Getenv("DATABASE_URL"))
+
+	//DB, err = gorm.Open("postgres", fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", defaultConfig.GetString("db_host"), defaultConfig.GetString("db_port"), defaultConfig.GetString("db_user"), defaultConfig.GetString("db_name"), defaultConfig.GetString("db_password")))
 	if err != nil {
-		fmt.Printf("Cannot connect to postgres database")
-		log.Fatal("This is the error:", err)
+		fmt.Printf("Cannot connect to postgres database\n")
+		log.Fatal("This is the error: ", err)
 	}
 }
 
